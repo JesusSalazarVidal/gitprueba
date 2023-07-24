@@ -1,0 +1,32 @@
+###
+POST  http://localhost:3000/crearUsuario HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombreUsuario": "leeknow",
+    "nombre": "Lee Minho",
+    "password": "123",
+    "huella": "ghkkskslsaaaaall@"
+}
+
+###
+GET http://localhost:3000/readUsuario/64b58f1cfbec98946f574a25 HTTP/1.1
+
+###
+PUT  http://localhost:3000/updateUsuario/64b58f1cfbec98946f574a25 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombreUsuario": "Skz_05",
+    "nombre": "Jesus Salazar Vidal",
+    "password": "Skz2023",
+    "huella": "ghh1k2okso098"
+}
+
+
+### 
+GET http://localhost:3000/readUsuarioByNombreUsuario/leeknow HTTP/1.1
+
+
+###
+DELETE http://localhost:3000/deleteUsuario/64b5922e6d8ccc3f8daf31a1 HTTP/1.1

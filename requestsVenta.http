@@ -1,0 +1,21 @@
+###
+POST  http://localhost:3000/crearIngreso HTTP/1.1
+Content-Type: application/json
+
+{
+    "cantidad": 3000
+}
+
+###
+GET http://localhost:3000/readIngreso/64b823d34e0ae8ff733f6cd2 HTTP/1.1
+
+###
+PUT http://localhost:3000/updateIngreso/64b823d34e0ae8ff733f6cd2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "cantidad": 4000
+}
+
+###
+DELETE http://localhost:3000/deleteIngreso/64b823d34e0ae8ff733f6cd2 HTTP/1.1

@@ -1,0 +1,23 @@
+###
+POST http://localhost:3000/crearVenta HTTP/1.1
+Content-Type: application/json
+
+{
+    "productos": ["64b80c4bbf4b64d70ed2e704","64b80c4bbf4b64d70ed2e704"],
+    "total": 34
+}
+
+###
+GET http://localhost:3000/readVenta/64b81d56dd29be6e05c17fd1 HTTP/1.1
+
+### 
+PUT http://localhost:3000/updateVenta/64b81d56dd29be6e05c17fd1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "productos": ["64b80c4bbf4b64d70ed2e704","64b80c4bbf4b64d70ed2e704"],
+    "total": 90
+}
+
+###
+DELETE http://localhost:3000/deleteVenta/64b81d56dd29be6e05c17fd1 HTTP/1.1
