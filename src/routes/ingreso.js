@@ -1,4 +1,5 @@
 const express = require('express');
+//importamos el modelo de ingreso
 const Ingreso = require('../models/ingreso');
 
 const router = express.Router();

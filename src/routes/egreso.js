@@ -2,6 +2,8 @@ const express = require('express');
 const Egreso = require('../models/egreso');
 
 const router = express.Router();
+
+//Funcion para obtener la fecha y hora actuales.
 function getDate() {
     // Obtén la fecha y hora actual en UTC
     const fechaActual = new Date();
@@ -16,7 +18,7 @@ function getDate() {
 
 //Crear Egreso
 router.post('/crearEgreso', (req, res) =>{
-    const {idUsuario, cantidad }= req.body;
+    const {idUsuario, cantidad }= req.body;//obtenemos los datos que llegan desde req
     const fecha = getDate();
 
     const newEgreso = new Egreso({
@@ -29,6 +31,7 @@ router.post('/crearEgreso', (req, res) =>{
 
 //leer egreso por id
 router.get('/readEgreso/:id', (req, res) =>{
+    //obtenemos el id para realizar la busqueda.
     const {id} = req.params;
     Egreso.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
