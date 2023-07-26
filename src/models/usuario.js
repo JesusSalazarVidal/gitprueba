@@ -1,5 +1,12 @@
+/**
+ * Autores: Jesus Salazar, Diana Melina Lara
+ * Julio 26, 2023
+ */
+
+//Requerimos mongoose
 const mongoose = require('mongoose');
 
+//Definición del esquema para la colección de usuarios
 const usuarioSchema = mongoose.Schema({
     nombreUsuario:{
         type: String,
@@ -20,4 +27,7 @@ const usuarioSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+// Crear el modelo basado en el esquema
+const Usuario = mongoose.model('Userio', userSchema);
+
+module.exports = Usuario;
