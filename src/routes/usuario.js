@@ -26,6 +26,16 @@ router.post('/crearUsuario', (req, res) =>{
     newUsuario.save().then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
+/**-------------Obtener Usuarios-----------
+ *la ruta '/obtenerVentas' es un GET que permite obtener todos los registros de usuarios
+ * Se buscan los usuarios en la base de datos mediante 'Usuario.find()'.
+ * 
+ */
+ router.get('/obtenerUsuarios', (req, res) =>{
+    
+    Usuario.find().then((data) => res.json(data)).catch((error) => res.json({message: error}));
+});
+
 /**Leer Usuario por id
  * La ruta 'obtenerUsuario/:id'es un GET que permite leer un usuario en especifico por su Id.
  * El Id se obtine de los parametros de la URL (req.paramas) y se utiliza para buscar el usuario en la base de datos mediante 'Usuario.findById(id)'

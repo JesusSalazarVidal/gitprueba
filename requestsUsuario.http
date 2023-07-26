@@ -10,6 +10,9 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:3000/obtenerUsuarios HTTP/1.1
+
+###
 GET http://localhost:3000/obtenerUsuario/64c15d6e8ba90e1fe9cb86a8 HTTP/1.1
 
 ###

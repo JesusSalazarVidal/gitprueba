@@ -40,8 +40,19 @@ router.post('/crearVenta', (req, res) =>{
     newVenta.save().then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
+/**-------------Obtener Ventas-----------
+ *la ruta '/obtenerVentas' es un GET que permite obtener todos los registros de ventas
+ * Se buscan las ventas en la base de datos mediante 'Venta.find()'.
+ * 
+ */
+ router.get('/obtenerVentas', (req, res) =>{
+    
+    Venta.find().then((data) => res.json(data)).catch((error) => res.json({message: error}));
+});
+
+
 /**-------------Obtener Venta-----------
- *la ruta '/obtenerVenta/:id' es un GET que perimte obtener una venta con un id en especifico.
+ *la ruta '/obtenerVenta/:id' es un GET que permite obtener una venta con un id en específico.
  * El Id se obtine de los parametros de la URL (req.params).
  * Se busca la venta en la base de datos mediante 'Venta.findById(id)'.
  * 
@@ -52,9 +63,9 @@ router.get('/obtenerVenta/:id', (req, res) =>{
 });
 
 /**---------Actualizar Venta-----------
- * la ruta '/actualizarVenta/:id' es un PUT que permite actualizar una venta con un id en especifico.
- * el id se obtine de los parametros del URL 'req.params'.
- * Los datos a actualizar se obtienen del curspo de la solicitud 'req.body'.
+ * La ruta '/actualizarVenta/:id' es un PUT que permite actualizar una venta con un id en específico.
+ * el Id se obtine de los parametros del URL 'req.params'.
+ * Los datos a actualizar se obtienen del cuerpo de la solicitud 'req.body'.
  * Se actualiza el resgitro utilizando Venta.updateOne().
  * 
  */
@@ -67,7 +78,7 @@ router.put('/actualizarVenta/:id', (req, res) => {
 });
 
 /**------------Eliminar Venta------------
- * La ruta '/eliminarVenta/:id' es un DELETE que perimite eliminar una Venta en específico por Id.
+ * La ruta '/eliminarVenta/:id' es un DELETE que permite eliminar una Venta en específico por Id.
  * El Id se obtiene de los parámetros de la URL.
  * El Id se utiliza para eliminar la venta de la base de datos mediante Venta.deleteOne().
  */

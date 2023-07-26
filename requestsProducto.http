@@ -9,7 +9,10 @@ Content-Type:  application/json
 }
 
 ###
-GET http://localhost:3000/readProducto/64b80e5565f53f229ea0517d HTTP/1.1
+GET http://localhost:3000/obtenerProducto/64b80e5565f53f229ea0517d HTTP/1.1
+
+###
+GET http://localhost:3000/obtenerProductos HTTP/1.1
 
 ###
 PUT http://localhost:3000/updateProducto/64b80e5565f53f229ea0517d HTTP/1.1
@@ -22,7 +25,7 @@ Content-Type:  application/json
 }
 
 ###
-DELETE http://localhost:3000/deleteProducto/64b8119104655604a09dd675 HTTP/1.1
+DELETE http://localhost:3000/eliminarProducto/64b8119104655604a09dd675 HTTP/1.1
 
 ###
-GET http://localhost:3000/readProductosByNombreProducto/Coca cola HTTP/1.1
+GET http://localhost:3000/obtenerProductosByNombreProducto/Coca cola HTTP/1.1
