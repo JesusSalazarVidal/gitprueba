@@ -27,29 +27,38 @@ router.post('/crearUsuario', (req, res) =>{
 });
 
 /**Leer Usuario por id
- * La ruta 'leerUsuario/:id'es un GET que permite leer un usuario en especifico por su Id.
+ * La ruta 'obtenerUsuario/:id'es un GET que permite leer un usuario en especifico por su Id.
  * El Id se obtine de los parametros de la URL (req.paramas) y se utiliza para bucara el usuario en la base de datos mediante 'UsuariofindById(id)'
  */
-router.get('/leerUsuario/:id', (req, res) =>{
+router.get('/obtenerUsuario/:id', (req, res) =>{
     const{id} = req.params;
     Usuario.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
-//actualizar usuario
-router.put('/updateUsuario/:id', (req, res) =>{
+/**Actualizar Usuario
+ * La ruta '/actualizarUsuario/:id' es un PUT que permite actualizar un usuario específico por su ID. 
+ * El id se obtine de los parametros URL y los datos a actualizar se obtienen del cuerpo de la solicitud con el 'req.body' y la actualizacion utilizando 'Usuario.updateOne()'
+ * 
+ */
+router.put('/actualizarUsuario/:id', (req, res) =>{
     const{id} = req.params;
     const {nombreUsuario, nombre, password, huella} = req.body;
     Usuario.updateOne({ _id: id }, { $set: {nombreUsuario, nombre, password, huella } }).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
-//bucar usuario por nombre de usuario
-router.get('/readUsuarioByNombreUsuario/:nombreUsuario', (req, res) =>{
+/**Obtener usuario por nombre de usuario
+ * La ruta '/obtenerUsuarioByNombreUsuario/:nombreUsuario' es un GET que permite buscar un usuario por su nombre de usuario. 
+ *  El nombre de usuario se obtiene de los parámetros de la URL y se utiliza para buscar el usuario en la base de datos mediante Usuario.findOne().
+ */
+router.get('/obtenerUsuarioByNombreUsuario/:nombreUsuario', (req, res) =>{
     const nombre = req.params.nombreUsuario;
     Usuario.findOne({nombreUsuario: nombre}).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
-//eliminar usuario
-router.delete('/deleteusuario/:id', (req, res) =>{
+/**Eliminar Usuario
+ * La ruta '/eliminarUsuario/:id' es un DELETE que permite eliminar un usuario específico por su ID. El ID se obtiene de los parámetros de la URL y se utiliza para eliminar el usuario de la base de datos mediante Usuario.deleteOne().
+ */
+router.delete('/eliminarUsuario/:id', (req, res) =>{
     const{id} = req.params;
     Usuario.deleteOne({ _id: id }).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
