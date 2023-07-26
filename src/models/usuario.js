@@ -28,6 +28,6 @@ const usuarioSchema = mongoose.Schema({
 });
 
 // Crear el modelo basado en el esquema
-const Usuario = mongoose.model('Userio', userSchema);
+const Usuario = mongoose.model('Usuario', usuarioSchema);
 
 module.exports = Usuario;
