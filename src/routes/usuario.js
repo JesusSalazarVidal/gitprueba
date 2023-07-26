@@ -28,7 +28,7 @@ router.post('/crearUsuario', (req, res) =>{
 
 /**Leer Usuario por id
  * La ruta 'obtenerUsuario/:id'es un GET que permite leer un usuario en especifico por su Id.
- * El Id se obtine de los parametros de la URL (req.paramas) y se utiliza para bucara el usuario en la base de datos mediante 'UsuariofindById(id)'
+ * El Id se obtine de los parametros de la URL (req.paramas) y se utiliza para buscar el usuario en la base de datos mediante 'Usuario.findById(id)'
  */
 router.get('/obtenerUsuario/:id', (req, res) =>{
     const{id} = req.params;
