@@ -3,9 +3,9 @@ POST http://localhost:3000/crearProducto HTTP/1.1
 Content-Type:  application/json
 
 {
-    "nombre": "jjjjakals",
-    "tipo": "bebidas",
-    "precio": 789
+    "nombre": "chicle",
+    "tipo": "dulces",
+    "precio": 2
 }
 
 ###

@@ -8,10 +8,11 @@ const mongoose = require('mongoose');
 
 //Definición del esquema para la colección de ventas
 const ventaSchema = mongoose.Schema({
-    productos:{
-        type: Array,
-        required: true
-    },
+    productos: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Producto', 
+        required: true 
+    }],
     total: {
         type:Number,
         required: true

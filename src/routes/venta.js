@@ -6,6 +6,7 @@
 //Requerimos  express y el modelo venta
 const express = require('express');
 const Venta = require('../models/venta');
+const Producto = require('../models/producto');
 const router = express.Router();
 
 //Funcion para obtener la fecha y hora local
@@ -28,9 +29,15 @@ function getDate() {
  * Se gurda en base de datos mediante newVenta.save().
  * 
  */ 
-router.post('/crearVenta', (req, res) =>{
-    const {productos, total} = req.body;
-    //const fecha = getDate();
+router.post('/crearVenta', async (req, res) =>{
+    // Obtener los IDs de los productos incluidos en la venta desde el cuerpo de la solicitud
+    const { productos } = req.body;
+
+    // Buscar los productos en la base de datos por sus IDs
+    const productosEnVenta = await Producto.find({ _id: { $in: productos } });
+    
+    // Calcular el total sumando los precios de los productos
+    const total = productosEnVenta.reduce((acc, producto) => acc + producto.precio, 0);
 
     const newVenta = new Venta({
         productos: productos,
@@ -45,9 +52,9 @@ router.post('/crearVenta', (req, res) =>{
  * Se buscan las ventas en la base de datos mediante 'Venta.find()'.
  * 
  */
- router.get('/obtenerVentas', (req, res) =>{
+ router.get('/obtenerVentas', async (req, res) =>{
     
-    Venta.find().then((data) => res.json(data)).catch((error) => res.json({message: error}));
+    await Venta.find().populate('productos').then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
 
@@ -57,10 +64,25 @@ router.post('/crearVenta', (req, res) =>{
  * Se busca la venta en la base de datos mediante 'Venta.findById(id)'.
  * 
  */
+/*
 router.get('/obtenerVenta/:id', (req, res) =>{
     const {id} = req.params;
     Venta.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
+*/
+// Ruta para obtener la venta por ID
+router.get('/obtenerVenta/:id', async (req, res) => {
+    try {
+      const venta = await Venta.findById(req.params.id).populate('productos');
+      if (!venta) {
+        return res.status(404).json({ message: 'Venta no encontrada' });
+      }
+  
+      res.json(venta);
+    } catch (err) {
+      res.status(500).json({ message: 'Error al obtener la venta', error: err });
+    }
+  });
 
 /**---------Actualizar Venta-----------
  * La ruta '/actualizarVenta/:id' es un PUT que permite actualizar una venta con un id en específico.

@@ -3,7 +3,7 @@ POST http://localhost:3000/crearVenta HTTP/1.1
 Content-Type: application/json
 
 {
-    "productos": [{"nombre": "coca", "tipo": "bebida", "precio": 16},{"nombre": "pepsi e", "tipo": "bebida", "precio": 16}],
+    "productos": ["64b80cc1bf4b64d70ed2e706", "64c3ea10b2d4804577bcfeab"],
     "total": 34
 }
 
@@ -11,7 +11,7 @@ Content-Type: application/json
 GET http://localhost:3000/obtenerVentas HTTP/1.1
 
 ###
-GET http://localhost:3000/obtenerVenta/64c16d7242058286e519c00b HTTP/1.1
+GET http://localhost:3000/obtenerVenta/64c3e5bede934331a74e444e HTTP/1.1
 
 ### 
 PUT http://localhost:3000/actualizarVenta/64c16d7242058286e519c00b HTTP/1.1
