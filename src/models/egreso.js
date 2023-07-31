@@ -8,9 +8,10 @@ const mongoose = require('mongoose');
 
 //Definición del esquema para la colección de egresos
 const egresoSchema = mongoose.Schema({
-    idUsuario:  {
+    idUsuario: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
+        ref: 'Usuario',
+        required: true
       },
       cantidad: {
         type: Number,
@@ -18,6 +19,7 @@ const egresoSchema = mongoose.Schema({
       },
       fecha: {
         type: Date,
+        default: Date.now,
         required: true
       }
 });

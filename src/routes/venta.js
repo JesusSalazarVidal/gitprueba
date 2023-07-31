@@ -64,13 +64,13 @@ router.post('/crearVenta', async (req, res) =>{
  * Se busca la venta en la base de datos mediante 'Venta.findById(id)'.
  * 
  */
-/*
-router.get('/obtenerVenta/:id', (req, res) =>{
+
+router.get('/obtenerVenta/:id', async (req, res) =>{
     const {id} = req.params;
-    Venta.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
+     await Venta.findById(id).populate('productos').then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
-*/
-// Ruta para obtener la venta por ID
+
+/* Ruta para obtener la venta por ID
 router.get('/obtenerVenta/:id', async (req, res) => {
     try {
       const venta = await Venta.findById(req.params.id).populate('productos');
@@ -83,6 +83,7 @@ router.get('/obtenerVenta/:id', async (req, res) => {
       res.status(500).json({ message: 'Error al obtener la venta', error: err });
     }
   });
+  */
 
 /**---------Actualizar Venta-----------
  * La ruta '/actualizarVenta/:id' es un PUT que permite actualizar una venta con un id en específico.
@@ -91,12 +92,19 @@ router.get('/obtenerVenta/:id', async (req, res) => {
  * Se actualiza el resgitro utilizando Venta.updateOne().
  * 
  */
-router.put('/actualizarVenta/:id', (req, res) => {
+router.put('/actualizarVenta/:id', async(req, res) => {
     const {id} = req.params;
-    const {productos, total} = req.body;
-    const fecha = getDate();
 
-    Venta.updateOne({_id: id}, {$set:{productos: productos, total: total, fecha: fecha}}).then((data) => res.json(data)).catch((error) => res.json({message: error}));
+    // Obtener los IDs de los productos incluidos en la venta desde el cuerpo de la solicitud
+    const { productos } = req.body;
+
+    // Buscar los productos en la base de datos por sus IDs
+    const productosEnVenta = await Producto.find({ _id: { $in: productos } });
+    
+    // Calcular el total sumando los precios de los productos
+    const total = productosEnVenta.reduce((acc, producto) => acc + producto.precio, 0);
+  
+    Venta.updateOne({_id: id}, {$set:{productos: productos, total: total}}).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
 /**------------Eliminar Venta------------

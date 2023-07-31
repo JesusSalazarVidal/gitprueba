@@ -10,19 +10,9 @@ const Egreso = require('../models/egreso');
 const router = express.Router();
 
 //Funcion para obtener la fecha y hora actuales.
-function getDate() {
-    // Obtén la fecha y hora actual en UTC
-    const fechaActual = new Date();
 
-    // Obtén el desplazamiento horario en minutos
-    const offset = fechaActual.getTimezoneOffset();
 
-    // Ajusta la fecha y hora sumando el desplazamiento horario en minutos
-    const fechaLocal = new Date(fechaActual.getTime() - (offset * 60 * 1000));
-    return fechaLocal;
-};
-
-/**-------------Crear Venta------------
+/**-------------Crear Egreso------------
  * La ruta '/crearEgreso' es POST que permite crear un nuevo egreso.
  * Los datos se obtienen del cuerpo de la solicitud por medio del 'req.body'.
  * Se crea un nuevo documento "Egreso".
@@ -31,12 +21,10 @@ function getDate() {
  */ 
 router.post('/crearEgreso', (req, res) =>{
     const {idUsuario, cantidad }= req.body;
-    const fecha = getDate();
 
     const newEgreso = new Egreso({
         idUsuario: idUsuario,
-        cantidad: cantidad,
-        fecha: fecha
+        cantidad: cantidad
       });
     newEgreso.save().then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
@@ -46,9 +34,9 @@ router.post('/crearEgreso', (req, res) =>{
  * Se buscan los egresos en la base de datos mediante 'Egreso.find()'.
  * 
  */
- router.get('/obtenerEgresos', (req, res) =>{
+ router.get('/obtenerEgresos', async (req, res) =>{
     
-    Egreso.find().then((data) => res.json(data)).catch((error) => res.json({message: error}));
+    await Egreso.find().populate('idUsuario').then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
 /**-------------Obtener Egreso-----------
@@ -56,12 +44,13 @@ router.post('/crearEgreso', (req, res) =>{
  * El Id se obtine de los parametros de la URL (req.params).
  * Se busca la venta en la base de datos mediante 'Egreso.findById(id)'.
  * 
- */
+*/
 
 router.get('/obtenerEgreso/:id', (req, res) =>{
     const {id} = req.params;
-    Egreso.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
+    Egreso.findById(id).populate('idUsuario').then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
+
 
 /**---------Actualizar Egreso-----------
  * La ruta '/actualizarEgreso/:id' es un PUT que permite actualizar un egreso con un id en específico.
