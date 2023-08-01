@@ -65,8 +65,9 @@ router.get('/obtenerUsuarioByNombreUsuario/:nombreUsuario', (req, res) =>{
     Usuario.findOne({nombreUsuario: nombre}).then((data) => res.json(data)).catch((error) => res.json({message: error}));
 });
 
-/**Eliminar Usuario
+/**Eliminar Usuario 
  * La ruta '/eliminarUsuario/:id' es un DELETE que permite eliminar un usuario específico por su ID. El ID se obtiene de los parámetros de la URL y se utiliza para eliminar el usuario de la base de datos mediante Usuario.deleteOne().
+ * 
  */
 router.delete('/eliminarUsuario/:id', (req, res) =>{
     const{id} = req.params;

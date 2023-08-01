@@ -32,4 +32,4 @@ GET http://localhost:3000/obtenerUsuarioByNombreUsuario/maite05 HTTP/1.1
 
 
 ###
-DELETE http://localhost:3000/eliminarUsuario/64b5922e6d8ccc3f8daf31a1 HTTP/1.1
+DELETE http://localhost:3000/eliminarUsuario/64c14f2f7a12eff8816e94f0 HTTP/1.1

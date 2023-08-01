@@ -9,21 +9,6 @@ const Ingreso = require('../models/ingreso');
 
 const router = express.Router();
 
-
-//Funcion para obtener la fecha y hora local
-function getDate() {
-    // Obtén la fecha y hora actual en UTC
-    const fechaActual = new Date();
-
-    // Obtén el desplazamiento horario en minutos
-    const offset = fechaActual.getTimezoneOffset();
-
-    // Ajusta la fecha y hora sumando el desplazamiento horario en minutos
-    const fechaLocal = new Date(fechaActual.getTime() - (offset * 60 * 1000));
-    return fechaLocal;
-};
-
-
 /**-------------Crear Ingreso------------
  * La ruta '/crearingreso' es POST que permite crear un nuevo ingreso.
  * Los datos se obtienen del cuerpo de la solicitud por medio del 'req.body'.
@@ -33,11 +18,9 @@ function getDate() {
  */ 
 router.post('/crearIngreso', (req, res) =>{
     const {cantidad} = req.body;
-    const fecha = getDate();
 
     const newIngreso = new Ingreso({
-        cantidad: cantidad,
-        fecha: fecha
+        cantidad: cantidad
     });
 
     newIngreso.save().then((data) => res.json(data)).catch((error) => res.json({message: error}));
